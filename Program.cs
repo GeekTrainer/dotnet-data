@@ -9,3 +9,18 @@ connection.Open();
 var command = connection.CreateCommand();
 command.CommandText = "CREATE TABLE IF NOT EXISTS people (first_name TEXT, last_name TEXT)";
 command.ExecuteNonQuery();
+
+Console.Write("Enter Last Name: ");
+var lastName = Console.ReadLine();
+
+command.CommandText = "INSERT INTO people (first_name, last_name) VALUES ('John', '" + lastName + "')";
+command.ExecuteNonQuery();
+
+// select all rows from people table
+command.CommandText = "SELECT * FROM people";
+var reader = command.ExecuteReader();
+// print all rows
+while (reader.Read())
+{
+    Console.WriteLine(reader["first_name"] + " " + reader["last_name"]);
+}
