@@ -13,8 +13,13 @@ command.ExecuteNonQuery();
 Console.Write("Enter Last Name: ");
 var lastName = Console.ReadLine();
 
-command.CommandText = "INSERT INTO people (first_name, last_name) VALUES ('John', '" + lastName + "')";
+// create insert command with lastName parameter
+command.CommandText = "INSERT INTO people (first_name, last_name) VALUES ('Joe', @lastName)";
+command.Parameters.AddWithValue("@lastName", lastName);
 command.ExecuteNonQuery();
+
+// command.CommandText = "INSERT INTO people (first_name, last_name) VALUES ('John', '" + lastName + "')";
+// command.ExecuteNonQuery();
 
 // select all rows from people table
 command.CommandText = "SELECT * FROM people";
