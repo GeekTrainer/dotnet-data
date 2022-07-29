@@ -5,7 +5,14 @@ using Microsoft.Data.Sqlite;
 var connection = new SqliteConnection("Data Source=test.db");
 connection.Open();
 
-// create table with first name and last name
 var command = connection.CreateCommand();
+
+// create table with first name and last name
 command.CommandText = "CREATE TABLE IF NOT EXISTS people (first_name TEXT, last_name TEXT)";
-command.ExecuteNonQuery();
+if(command.ExecuteNonQuery() > 0) {
+    // insert sample data into people table
+    command.CommandText = "INSERT INTO people (first_name, last_name) VALUES ('John', 'Doe')";
+    command.ExecuteNonQuery();
+    command.CommandText = "INSERT INTO people (first_name, last_name) VALUES ('Jane', 'Doe')";
+    command.ExecuteNonQuery();
+};
