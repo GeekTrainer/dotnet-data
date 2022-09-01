@@ -16,3 +16,9 @@ if(command.ExecuteNonQuery() > 0) {
     command.CommandText = "INSERT INTO people (first_name, last_name) VALUES ('Jane', 'Doe')";
     command.ExecuteNonQuery();
 };
+
+Console.Write("Enter last name: ");
+var lastName = Console.ReadLine();
+
+command.CommandText = "INSERT INTO people (first_name, last_name) VALUES ('John', '" + lastName + "')";
+command.ExecuteNonQuery();
